@@ -5,17 +5,17 @@
 #define TAB 8
 #define CASA_BRANCA -1
 #define CASA_VAZIA 0
-#define A 1 // PEÇA BRANCA
-#define B 2 //PEÇA PRETA
+#define A 1 // PEÃ‡A BRANCA
+#define B 2 //PEÃ‡A PRETA
 //-1 linha +1 coluna
 /*depois de definir a casa destino
 esquerda E<0 and direita E>7
 jog1 e jog2 <0 e >7
 */
 
-int opcaoJogada();//método p/ realizar as jogadas
-int movimentarPeca();//método p/ moimentar as peças
-int vezJogador();//método p/ controlar vez de quem está jogando
+int opcaoJogada();//mÃ©todo p/ realizar as jogadas
+int movimentarPeca();//mÃ©todo p/ moimentar as peÃ§as
+int vezJogador();//mÃ©todo p/ controlar vez de quem estÃ¡ jogando
 
 int matriz[TAB][TAB];/* = {{-1, -1, -1, -1, -1, -1, -1, -1},
 							{-1, -1, -1, -1, -1, -1, -1, -1},
@@ -28,7 +28,7 @@ int matriz[TAB][TAB];/* = {{-1, -1, -1, -1, -1, -1, -1, -1},
 
 char pecas[3] = { ' ', 'A', 'B' }; //variavel p/ colocar CHAR no tabuleiro
 int menu = 0, i = 0, j = 0;
-int fimJogo = 0, movimentoInvalido, linhaDestino = 0, colunaDestino = 0, linhaOrigem = 0, colunaOrigem = 0, movimento = 0, jogador = 0; //variaveis das peças
+int fimJogo = 0, movimentoInvalido, linhaDestino = 0, colunaDestino = 0, linhaOrigem = 0, colunaOrigem = 0, movimento = 0, jogador = 0; //variaveis das peÃ§as
 
 int inicioGame() {
 	system("cls");
@@ -70,69 +70,69 @@ int main() {
 	{
 		printf("\n\t Bem vindo ao jogo de Damas!");
 		printf("\n\t 1 - Iniciar jogo.");
-		printf("\n\t 2 - Informações do jogo.");
+		printf("\n\t 2 - InformaÃ§Ãµes do jogo.");
 		printf("\n\t 3 - Sair do jogo.");
-		printf("\n\n\t Selecione uma opção => ");
+		printf("\n\n\t Selecione uma opÃ§Ã£o => ");
 		scanf_s("%d", &menu);
 
 		switch (menu)
 		{
-		case 1: //COMEÇAR O JOGO (FUNÇÃO JOGO)
+		case 1: //COMEÃ‡AR O JOGO (FUNÃ‡ÃƒO JOGO)
 			inicioGame();
 
 			break;
 
-		case 2: // INFORMAÇÕES DO JOGO
+		case 2: // INFORMAÃ‡Ã•ES DO JOGO
 			break;
 
 		case 3: //SAIR DO JOGO
 			system("cls");
-			printf("\n\tVOCÊ SAIU DO JOGO!");
+			printf("\n\tVOCÃŠ SAIU DO JOGO!");
 			break;
 
 		default:
 			system("cls");
-			printf("\n\tOPÇÃO INVÁLIDA, TENTE NOVAMENTE!");	
+			printf("\n\tOPÃ‡ÃƒO INVÃLIDA, TENTE NOVAMENTE!");	
 		}
 	} while (menu != 3);
 	return 0;
 }
 
 int opcaoJogada() {
-	printf("\n\tDIGITE A PEÇA QUE DESEJA MOVIMENTAR!");//escolher peça
+	printf("\n\tDIGITE A PEÃ‡A QUE DESEJA MOVIMENTAR!");//escolher peÃ§a
 	printf("\n\n\t\t\tLINHA => ");
 	scanf_s("\n%d", &linhaOrigem);
 	printf("\n\n\t\t\tCOLUNA => ");
 	scanf_s("\n%d", &colunaOrigem);
-	printf("\n\tQUAL MOVIMENTO DESEJA FAZER?");//ocupar peça
+	printf("\n\tQUAL MOVIMENTO DESEJA FAZER?");//ocupar peÃ§a
 	printf("\n\t 1 = ESQUERDA \n\t 2 = DIREITA");
 	printf("\n\n\t\t\tJOGADA => ");
 	scanf_s("\n\t%d", &movimento);
 	
-	//verificarção de regra
+	movimentarPeca();
 }
 
 int movimentarPeca(){
 	inicioGame();
 	
-	if(jogador == 1){//jogada p/ peça preta
+	if(jogador == 1){//jogada p/ peÃ§a preta
 		if(movimento == 1 && matriz[linhaOrigem][colunaOrigem] == B )
 		{	
-			if(matriz[linhaOrigem-1][colunaOrigem-1] == 0){ //se o movimento for p/ as peças pretas, -1 casa p/ subir
-				matriz[linhaOrigem][colunaOrigem] = 0; //resetar ela p/ olocar p/ peças pretas
-				matriz[linhaOrigem-1][colunaOrigem-1] = B; //colocar a peça preta
+			if(matriz[linhaOrigem-1][colunaOrigem-1] == 0){ //se o movimento for p/ as peÃ§as pretas, -1 casa p/ subir
+				matriz[linhaOrigem][colunaOrigem] = 0; //resetar ela p/ olocar p/ peÃ§as pretas
+				matriz[linhaOrigem-1][colunaOrigem-1] = B; //colocar a peÃ§a preta
 				movimentoInvalido = 0; //movimento errado zerado
 				jogador = 0; //trocar a vez do jogador				
 			}else{
-				if(matriz[linhaOrigem-1][colunaOrigem-1] == A && matriz[linhaOrigem-2][colunaOrigem == 0])//se houver uma peça branca no caminho faz o movimento -2
+				if(matriz[linhaOrigem-1][colunaOrigem-1] == A && matriz[linhaOrigem-2][colunaOrigem == 0])//se houver uma peÃ§a branca no caminho faz o movimento -2
 				{
 					matriz[linhaOrigem][colunaOrigem] = 0; //reset
-					matriz[linhaOrigem-1][colunaOrigem-1] = 0; //-1 p deixar em branco a peça que passou por cima
-					matriz[linhaOrigem-2][colunaOrigem-2] = B; //colocar a peça preta
+					matriz[linhaOrigem-1][colunaOrigem-1] = 0; //-1 p deixar em branco a peÃ§a que passou por cima
+					matriz[linhaOrigem-2][colunaOrigem-2] = B; //colocar a peÃ§a preta
 					movimentoInvalido = 0; //movimento errado zerado
 					jogador = 0; //trocar a vez do jogador
 				}else{
-					movimentoInvalido = 1; //caso movimento não seja validado pelo restante "=1" p mostrar erro
+					movimentoInvalido = 1; //caso movimento nÃ£o seja validado pelo restante "=1" p mostrar erro
 				}								
 			}
 			
@@ -140,29 +140,29 @@ int movimentarPeca(){
 		}else{//jogada p/ direita
 			if(movimento == 2 && matriz[linhaOrigem][colunaOrigem] == B)
 			{
-				if(matriz[linhaOrigem-1][colunaOrigem+1] == 0){ //caso não tenha peça inimiga na diagonal
+				if(matriz[linhaOrigem-1][colunaOrigem+1] == 0){ //caso nÃ£o tenha peÃ§a inimiga na diagonal
 					matriz[linhaOrigem-1][colunaOrigem+1] = 0; //same above
 					matriz[linhaOrigem-1][colunaOrigem+1] = B; //same above
 					movimentoInvalido = 0; //movimento errado zerado
 					jogador = 0; //trocar a vez do jogador
 				}
 				
-			}else{//caso tenha peça inimiga
+			}else{//caso tenha peÃ§a inimiga
 				if(matriz[linhaOrigem-1][colunaOrigem+1] == A && matriz[linhaOrigem-2][colunaOrigem+2] == 0);
 				
 			} 
 		}
-	}if(jogador ==0){//jogada peça branca
+	}if(jogador ==0){//jogada peÃ§a branca
 				if(movimento == 1 && matriz[linhaOrigem][colunaOrigem] == A)//moimento p/ direita
 		{
 			if(matriz[linhaOrigem+1][colunaOrigem-1] == 0)
-			{ //se o movimento não tiver peça inimiga
-				matriz[linhaOrigem][colunaOrigem] = 0; //zerar posição inicial dela
+			{ //se o movimento nÃ£o tiver peÃ§a inimiga
+				matriz[linhaOrigem][colunaOrigem] = 0; //zerar posiÃ§Ã£o inicial dela
 				matriz[linhaOrigem+1][colunaOrigem-1] == A;
 				movimentoInvalido = 0;
 				jogador = 1;	
 			}else{
-				if(matriz[linhaOrigem+1][colunaOrigem-1] = B && matriz[linhaOrigem+2][colunaOrigem-2] == 0)//se houver uma peça inimiga e a proxima estiver vazia executa o movimento
+				if(matriz[linhaOrigem+1][colunaOrigem-1] = B && matriz[linhaOrigem+2][colunaOrigem-2] == 0)//se houver uma peÃ§a inimiga e a proxima estiver vazia executa o movimento
 				{
 					matriz[linhaOrigem][colunaOrigem] = 0;
 					matriz[linhaOrigem+1][colunaOrigem-1] = 0;
@@ -170,7 +170,7 @@ int movimentarPeca(){
 					movimentoInvalido = 0;
 					jogador = 1;
 				}else{
-					movimentoInvalido = 1;//se não tiver espaço p alocar peça 
+					movimentoInvalido = 1;//se nÃ£o tiver espaÃ§o p alocar peÃ§a 
 				}						
 			}			
 		}			
@@ -199,9 +199,9 @@ int movimentarPeca(){
 int vezJogador(){
 	
 	if(jogador == 1){
-		printf("\n\tPEÇAS BRANCAS JOGANDO!!!");
+		printf("\n\tPEÃ‡AS BRANCAS JOGANDO!!!");
 	}else{
-		printf("\n\tPEÇAS PRETAS JOGANDO!!!");
+		printf("\n\tPEÃ‡AS PRETAS JOGANDO!!!");
 	}
 	return 0;
 }
